@@ -1,38 +1,22 @@
-# -*- coding: utf-8 -*-
-"""
-
-All of the code I have written so far for the TransactionVisualizationProject 
-will be stored here , to be broken up into manageable chunks
-
-"""
+'''
+The VizFunction.py script contains the functions that VizExec runs to visualize my bank transaction data
+'''
 
 
-# importing the essential libraries and data
-
-import pandas as pd
-import datetime as dt
-
-# Exporting the data from the spreadsheet into a pandas dataframe
-
-df = pd.read_excel(r'C:\Users\daypa\Documents\git\Bank_Transaction_Project\TransactionVisualizationProject\Transactions_20-21.xlsx');
-print(df.head(10));
-
-
-
-# Creating the ValueToDate Function
-
-    
-def valueToDate(DataFrame ):
+def valueToDate(DataFrame):
     '''
     (Pandas Data Frame) ---> (Pandas Data Frame)
     
     valueToDate converts Date Values in a pandas data frame into a readable format
     
     Restrictions:
-    This function assumes that the column that contains the date values is in row position 0.
+    This function assumes that the column that contains the date values is in column position 0.
     
     
     '''
+    
+    import datetime as dt 
+    
     rDate = dt.datetime(1899 , 12, 30); # The date at which the date values are referenced 12/30/1899
 
     for i in range(0 , len(DataFrame)): 
@@ -55,39 +39,17 @@ def valueToDate(DataFrame ):
 
 
 
-# Calling the valueToDate Function and storing it as a new dataframe object
-
-df2 = valueToDate(df);
-
-
-
-# Iterating over the SubClass column and collecting all of the unique values
-     
-
-SpecificClass = []; # defining a list to collect unique instances of subclasses
-Count = 0;
-
-for i in df2.iloc[: , (3)]: # iterating over the values in the "subclass" column of the dataset
-    
-    if i not in SpecificClass:
-        
-        SpecificClass.append(i); # append the SubClass list if the sub class value is not already in the list
-        Count += 1; # icrement the count by one every time a new sub class is enocuntererd
-
-print(SpecificClass);    
-
-
-
-# Reclassifying the specific SubClass Values into a predetermined set of general ones
+# A list of SubClass Values I would like to reclassify my data into
 
 SubClasses = ['Utilities' , 'Rent' , 'Loans' , 'Grocery' , 'Car', 'Fast Food' , 'Fun' , 'Misc', 'Transfer'];
 # The list of subclasses we want to reclassify other values into
 
-import re # importing the re module
+
 
 
 def ReClass(DataFrame): # defining the function
     
+    import re #importing the regex module
     
     UtilReg = re.compile(r'AT&T Internet|Insurance & Phone|SDGE'); # A regex for the utilities category
     LoansReg = re.compile(r'Parent Loans'); # Regex for the loans category
@@ -117,19 +79,3 @@ def ReClass(DataFrame): # defining the function
             
         
     return DataFrame; # return the modified iterable object
-            
-        
-# Storing the reclassified dataframe as a new one
-
-df3 = ReClass(df2);
-
-
-
-
-
-
-    
-    
-    
-    
-    
