@@ -48,6 +48,24 @@ print(SpecificClass);
 FX.ReClass(tData);
 
 
+# Categorizing transactions into one of three categories [Fixed , Variable , Discretionray]
+# To Do:
+    # Define a function that categorizes values in the "Class" column into one of three categories
+    # Determine the values that exist in the "Class" column 
+
+
+# Collectiong the unique values in the "Class" column
+
+Classes = []; # List to collect unique values
+
+for i in range(0 , len(tData)):
+               
+               if tData.iloc[i , 2] not in Classes:
+                   Classes.append(tData.iloc[i,2]);
+                  
+    
+
+
 
 
 
